@@ -1,24 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.scss";
+
+const slidesArr = ["1", "2", "3"];
 
 function App() {
+  const slides = slidesArr.map((slide, i) => {
+    return (
+      <div key={i}>
+        <h2>{slide}</h2>
+      </div>
+    );
+  });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>this is the title of the page</h1>
+
+      {slides}
     </div>
   );
 }

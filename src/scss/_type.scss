@@ -1,0 +1,39 @@
+h1 {
+    margin-bottom: 25px;
+    font-size: 68px;
+    letter-spacing: 2px;
+  }
+
+  h2 {
+    margin-bottom: 20px;
+    font-size: 36px;
+    letter-spacing: 2px;
+  }
+
+  p {
+    font-size: 18px;
+    letter-spacing: 1px;
+  }
+
+  a {
+    text-decoration: none;
+    color: $white;
+    display: block;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-size: 18px;
+  }
+
+  @media(max-width: 600px) {
+    h1 {
+      font-size: 42px;
+    }
+
+    h2 {
+      font-size: 30px
+    }
+
+    p, a {
+      font-size: 16px
+    }
+  }
