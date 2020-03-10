@@ -1,22 +1,78 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.scss";
 
-const slidesArr = ["1", "2", "3"];
+function Todo({ todo, index, completeTodo, removeTodo }) {
+  return (
+    <div style={{textDecoration: todo.isCompleted ? 'line-through' : ''}} className="todo">
+      {todo.text}
+      <div>
+        <button onClick={() => completeTodo(index)}>Complete</button>
+      </div>
+      <div>
+        <button onClick={() => removeTodo(index)}>remove</button>
+      </div>
+    </div>
+  )
+}
+
+function TodoForm({addTodo}) {
+  const [value, setValue] = useState('');
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    if(!value) return;
+    addTodo(value);
+    setValue('');
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="text" className="input" placeholder="Add Todo" value={value} onChange={e => setValue(e.target.value)} />
+    </form>
+  )
+}
 
 function App() {
-  const slides = slidesArr.map((slide, i) => {
-    return (
-      <div key={i}>
-        <h2>{slide}</h2>
-      </div>
-    );
-  });
+  const[ todos, setTodos ] = useState([
+    {
+      text: 'Learn about React',
+      isCompleted: false
+    },
+    {
+      text: 'Meet friend for lunch',
+      isCompleted: false
+    },
+    {
+      text: 'Build really cool todo app',
+      isCompleted: false
+    }
+  ]);
+
+  const addTodo = text => {
+    const newTodos = [...todos, { text }]
+    setTodos(newTodos);
+  };
+
+  const completeTodo = index => {
+    const newTodos = [...todos];
+    newTodos[index].isCompleted = true;
+    setTodos(newTodos)
+  };
+
+  const removeTodo = index => {
+    const newTodos = [...todos];
+    newTodos.splice(index, 1);
+    setTodos(newTodos);
+  }
 
   return (
     <div className="App">
-      <h1>this is the title of the page</h1>
-
-      {slides}
+      <div className="todo-list">
+        {todos.map((todo, index) => (
+          <Todo key={index} index={index} completeTodo={completeTodo} removeTodo={removeTodo} todo={todo}></Todo>
+        ))}
+        <TodoForm addTodo={addTodo} />
+      </div>
     </div>
   );
 }
